@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -11,6 +12,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TesteWebApiCompras.Context;
+using TesteWebApiCompras.Interfaces;
+using TesteWebApiCompras.Interfaces.servicos;
+using TesteWebApiCompras.Repositorios;
+using TesteWebApiCompras.Servicos;
 
 namespace TesteWebApiCompras
 {
@@ -26,6 +32,15 @@ namespace TesteWebApiCompras
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<MeuContexto>();
+            services.AddScoped<IProdutosRepositorio, ProdutoRepositorio>();
+            services.AddScoped<IEmpresaRepositorio, EmpresaRepositorio>();
+            services.AddScoped<IComprasRepositorio, CompraRepositorio>();
+
+            services.AddScoped<ICompraServico, CompraServico>();
+
+            services.AddDbContext<MeuContexto>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("MinhaConexao")));
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
