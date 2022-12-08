@@ -10,7 +10,6 @@ namespace TesteWebApiCompras.Interfaces.servicos
     {
         Task Adicionar(Produto produto);
         Task Atualizar(Produto produto);
-        Task Inserir(Produto produto);
         Task Remover(int id);
     }
 }

@@ -6,7 +6,7 @@ using TesteWebApiCompras.Modelos;
 
 namespace TesteWebApiCompras.Interfaces
 {
-    public interface IComprasRepositorio:IRepositorio<Compra>
+    public interface ICompraRepositorio:IRepositorio<Compra>
     {
     }
 }

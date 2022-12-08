@@ -9,7 +9,7 @@ using TesteWebApiCompras.Modelos;
 
 namespace TesteWebApiCompras.Repositorios
 {
-    public class CompraRepositorio : RepositorioBase<Compra>, IComprasRepositorio
+    public class CompraRepositorio : RepositorioBase<Compra>, ICompraRepositorio
     {
         public CompraRepositorio(MeuContexto db) : base(db)
         {

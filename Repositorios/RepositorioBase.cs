@@ -21,8 +21,16 @@ namespace TesteWebApiCompras.Repositorios
         }
         public async Task Adicionar(TEntidade entidade)
         {
-            DbSet.Add(entidade);
-            await SaveChanges();
+            try
+            {
+                DbSet.Add(entidade);
+                await SaveChanges();
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
         }
 
         public async Task Atualizar(TEntidade entidade)
@@ -53,13 +61,25 @@ namespace TesteWebApiCompras.Repositorios
 
         public async Task Remover(int id)
         {
-            DbSet.Remove(new TEntidade { Id = id });
-            await SaveChanges();
+            try
+            {
+                DbSet.Remove(new TEntidade { Id = id });
+                await SaveChanges();
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
         }
 
         public async Task<int> SaveChanges()
         {
             return await Db.SaveChangesAsync();
+        }
+        public int SaveChangesTeste()
+        {
+            return Db.SaveChanges();
         }
     }
 }

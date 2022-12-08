@@ -9,8 +9,8 @@ namespace TesteWebApiCompras.Servicos
 {
     public class CompraServico : ICompraServico
     {
-        private IComprasRepositorio _comprasRepositorio;
-        public CompraServico(IComprasRepositorio comprasRepositorio)
+        private ICompraRepositorio _comprasRepositorio;
+        public CompraServico(ICompraRepositorio comprasRepositorio)
         {
             _comprasRepositorio = comprasRepositorio;
         }

@@ -33,11 +33,13 @@ namespace TesteWebApiCompras
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<MeuContexto>();
-            services.AddScoped<IProdutosRepositorio, ProdutoRepositorio>();
+            services.AddScoped<IProdutoRepositorio, ProdutoRepositorio>();
             services.AddScoped<IEmpresaRepositorio, EmpresaRepositorio>();
-            services.AddScoped<IComprasRepositorio, CompraRepositorio>();
+            services.AddScoped<ICompraRepositorio, CompraRepositorio>();
 
             services.AddScoped<ICompraServico, CompraServico>();
+            services.AddScoped<IEmpresaServico, EmpresaServico>();
+            services.AddScoped<IProdutoServico, ProdutoServico>();
 
             services.AddDbContext<MeuContexto>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("MinhaConexao")));
