@@ -14,6 +14,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using TesteWebApiCompras.Context;
 using TesteWebApiCompras.Interfaces;
+using TesteWebApiCompras.Interfaces.IRepositorios;
 using TesteWebApiCompras.Interfaces.Servicos;
 using TesteWebApiCompras.Repositorios;
 using TesteWebApiCompras.Servicos;
@@ -32,10 +33,14 @@ namespace TesteWebApiCompras
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddControllers().AddNewtonsoftJson(opt => 
+            opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+
             services.AddScoped<MeuContexto>();
             services.AddScoped<IProdutoRepositorio, ProdutoRepositorio>();
             services.AddScoped<IEmpresaRepositorio, EmpresaRepositorio>();
             services.AddScoped<ICompraRepositorio, CompraRepositorio>();
+            services.AddScoped<IItensCompraRepositorio, ItensCompraRepositorio>();
 
             services.AddScoped<ICompraServico, CompraServico>();
             services.AddScoped<IEmpresaServico, EmpresaServico>();
