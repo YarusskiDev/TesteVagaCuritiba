@@ -14,7 +14,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using TesteWebApiCompras.Context;
 using TesteWebApiCompras.Interfaces;
-using TesteWebApiCompras.Interfaces.servicos;
+using TesteWebApiCompras.Interfaces.Servicos;
 using TesteWebApiCompras.Repositorios;
 using TesteWebApiCompras.Servicos;
 
@@ -40,6 +40,7 @@ namespace TesteWebApiCompras
             services.AddScoped<ICompraServico, CompraServico>();
             services.AddScoped<IEmpresaServico, EmpresaServico>();
             services.AddScoped<IProdutoServico, ProdutoServico>();
+            services.AddScoped<IItensCompraServico, ItensCompraServico>();
 
             services.AddDbContext<MeuContexto>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("MinhaConexao")));

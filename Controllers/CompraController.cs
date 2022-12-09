@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TesteWebApiCompras.Interfaces;
+using TesteWebApiCompras.Interfaces.Servicos;
 using TesteWebApiCompras.Modelos;
 using TesteWebApiCompras.Repositorios;
 

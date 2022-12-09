@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace TesteWebApiCompras.Modelos
@@ -10,6 +11,7 @@ namespace TesteWebApiCompras.Modelos
     {
         public string Nome { get; set; }
 
+        [JsonIgnore]
         public virtual List<Compra> Compras { get; set; }
     }
 }

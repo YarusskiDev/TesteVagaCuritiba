@@ -4,22 +4,25 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace TesteWebApiCompras.Modelos
 {
     public class ItensCompras : Entidade
     {
 
-        [ForeignKey("IdCompra")]
         public int IdCompra { get; set; }
 
-        [ForeignKey("IdProduto")]
         public int IdProduto { get; set; }
 
         public int Quantidade { get; set; }
 
+        [JsonIgnore]
+        [ForeignKey("IdCompra")]
         public virtual Compra Compra { get; set; }
 
+        [JsonIgnore]
+        [ForeignKey("IdProduto")]
         public virtual Produto Produto { get; set; }
 
     }

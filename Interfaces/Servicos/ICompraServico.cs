@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using TesteWebApiCompras.Modelos;
 
-namespace TesteWebApiCompras.Interfaces
+namespace TesteWebApiCompras.Interfaces.Servicos
 {
     public interface ICompraServico
     {

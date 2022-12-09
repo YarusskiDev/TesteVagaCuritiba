@@ -20,17 +20,9 @@ namespace TesteWebApiCompras.Repositorios
             DbSet = db.Set<TEntidade>();
         }
         public async Task Adicionar(TEntidade entidade)
-        {
-            try
-            {
+        {          
                 DbSet.Add(entidade);
-                await SaveChanges();
-            }
-            catch (Exception ex)
-            {
-
-                throw;
-            }
+                await SaveChanges();          
         }
 
         public async Task Atualizar(TEntidade entidade)

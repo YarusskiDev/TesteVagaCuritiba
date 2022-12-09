@@ -6,10 +6,11 @@ using TesteWebApiCompras.Modelos;
 
 namespace TesteWebApiCompras.Interfaces.Servicos
 {
-    public interface IProdutoServico
+    public interface IItensCompraServico
     {
-        Task Adicionar(Produto produto);
-        Task Atualizar(Produto produto);
+        Task Adicionar(ItensCompras itensCompras);
+        Task Atualizar(ItensCompras itensCompras);
         Task Remover(int id);
+
     }
 }

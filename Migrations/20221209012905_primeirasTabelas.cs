@@ -38,18 +38,17 @@ namespace TesteWebApiCompras.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    IdCliente = table.Column<int>(type: "int", nullable: false),
-                    EmpresaId = table.Column<int>(type: "int", nullable: true)
+                    IdEmpresa = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Compras", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Compras_Empresas_EmpresaId",
-                        column: x => x.EmpresaId,
+                        name: "FK_Compras_Empresas_IdEmpresa",
+                        column: x => x.IdEmpresa,
                         principalTable: "Empresas",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -60,41 +59,39 @@ namespace TesteWebApiCompras.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     IdCompra = table.Column<int>(type: "int", nullable: false),
                     IdProduto = table.Column<int>(type: "int", nullable: false),
-                    Quantidade = table.Column<int>(type: "int", nullable: false),
-                    CompraId = table.Column<int>(type: "int", nullable: true),
-                    ProdutoId = table.Column<int>(type: "int", nullable: true)
+                    Quantidade = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ItensCompras", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ItensCompras_Compras_CompraId",
-                        column: x => x.CompraId,
+                        name: "FK_ItensCompras_Compras_IdCompra",
+                        column: x => x.IdCompra,
                         principalTable: "Compras",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ItensCompras_Produtos_ProdutoId",
-                        column: x => x.ProdutoId,
+                        name: "FK_ItensCompras_Produtos_IdProduto",
+                        column: x => x.IdProduto,
                         principalTable: "Produtos",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Compras_EmpresaId",
+                name: "IX_Compras_IdEmpresa",
                 table: "Compras",
-                column: "EmpresaId");
+                column: "IdEmpresa");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ItensCompras_CompraId",
+                name: "IX_ItensCompras_IdCompra",
                 table: "ItensCompras",
-                column: "CompraId");
+                column: "IdCompra");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ItensCompras_ProdutoId",
+                name: "IX_ItensCompras_IdProduto",
                 table: "ItensCompras",
-                column: "ProdutoId");
+                column: "IdProduto");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

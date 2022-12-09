@@ -1,42 +1,42 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using TesteWebApiCompras.Interfaces;
+using TesteWebApiCompras.Interfaces.IRepositorios;
 using TesteWebApiCompras.Interfaces.Servicos;
 using TesteWebApiCompras.Modelos;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+using TesteWebApiCompras.Repositorios;
+using TesteWebApiCompras.Servicos;
 
 namespace TesteWebApiCompras.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EmpresaController : ControllerBase
+    public class ItensCompraController : Controller
     {
-        private IEmpresaServico _empresaServico;
-        private IEmpresaRepositorio _empresaRepositorio;
-        public EmpresaController(IEmpresaServico empresaServico, IEmpresaRepositorio empresaRepositorio)
+        private IItensCompraServico _itensCompraServico;
+        private IItensCompraRepositorio _itensCompraRepositorio;
+        public ItensCompraController(IItensCompraServico itensCompraServico, IItensCompraRepositorio itensCompraRepositorio)
         {
-            _empresaServico = empresaServico;
-            _empresaRepositorio = empresaRepositorio;
-
+            _itensCompraServico = itensCompraServico;
+            _itensCompraRepositorio = itensCompraRepositorio;
         }
 
         [ApiConventionMethod(typeof(DefaultApiConventions), nameof(DefaultApiConventions.Get))]
         [HttpGet]
-        public async Task<ActionResult<List<Empresa>>> Get()
+        public async Task<ActionResult<List<ItensCompras>>> Get()
         {
-            var result = await _empresaRepositorio.ObterTodos();
+            var result = await _itensCompraRepositorio.ObterTodos();
             return result;
         }
 
         [ApiConventionMethod(typeof(DefaultApiConventions), nameof(DefaultApiConventions.Get))]
         [HttpGet("{id:int}")]
-        public ActionResult Get(int id)
+        public async Task<ActionResult> Get(int id)
         {
-            var result = _empresaRepositorio.ObterPorId(id).GetAwaiter().GetResult();
+            var result = await _itensCompraRepositorio.ObterPorId(id);
             if (result == null)
             {
                 return BadRequest();
@@ -46,17 +46,17 @@ namespace TesteWebApiCompras.Controllers
 
         [ApiConventionMethod(typeof(DefaultApiConventions), nameof(DefaultApiConventions.Post))]
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] Empresa empresa)
+        public async Task<IActionResult> Post([FromBody] ItensCompras itens)
         {
-            await _empresaServico.Adicionar(empresa);
-            return CreatedAtAction(nameof(Post),empresa);
+            await _itensCompraServico.Adicionar(itens);
+            return CreatedAtAction(nameof(Post), itens);
         }
 
         [ApiConventionMethod(typeof(DefaultApiConventions), nameof(DefaultApiConventions.Put))]
         [HttpPut("{id:int}")]
-        public async Task<ActionResult> Put(int id, [FromBody] Empresa empresa)
+        public async Task<ActionResult> Put(int id, [FromBody] ItensCompras itensCompras)
         {
-            await _empresaServico.Atualizar(empresa);
+            await _itensCompraServico.Atualizar(itensCompras);
 
             return NoContent();
         }
@@ -65,7 +65,7 @@ namespace TesteWebApiCompras.Controllers
         [HttpDelete("{id:int}")]
         public async Task<ActionResult> Delete(int id)
         {
-            await _empresaServico.Remover(id);
+            await _itensCompraServico.Remover(id);
             return NoContent();
         }
     }
