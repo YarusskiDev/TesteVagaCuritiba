@@ -12,9 +12,7 @@ namespace TesteWebApiCompras.Contexto
     {
         public void Configure(EntityTypeBuilder<Compra> builder)
         {
-            builder.ToTable("Compras");
-            builder.HasKey(p => p.Id);
-            
+         
         }
 
     }

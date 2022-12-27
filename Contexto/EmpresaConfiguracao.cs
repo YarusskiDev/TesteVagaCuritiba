@@ -12,9 +12,7 @@ namespace TesteWebApiCompras.Contexto
     {
         public void Configure(EntityTypeBuilder<Empresa> builder)
         {
-            builder.ToTable("Empresas");
-            builder.HasKey(p => p.Id);
-            builder.Property(p => p.Nome).HasColumnType("VARCHAR(50)").IsRequired();
+
         }
     }
 }
